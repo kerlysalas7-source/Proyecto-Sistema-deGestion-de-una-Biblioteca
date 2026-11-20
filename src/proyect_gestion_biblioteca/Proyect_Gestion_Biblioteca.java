@@ -6,7 +6,7 @@ package proyect_gestion_biblioteca;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * @JAIRO MASABAMDA, KERLY SALAS, ANDRES VILLACRES
+ * @JAIRO MASABANDA, KERLY SALAS, ANDRES VILLACRES
  */
 public class Proyect_Gestion_Biblioteca {
 
