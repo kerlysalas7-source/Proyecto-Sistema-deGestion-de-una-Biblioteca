@@ -8,7 +8,7 @@ package proyect_gestion_biblioteca;
  *
  * @author jairo
  */
-public class Libro extends MaterialBiblioteca {
+public class Libro extends MaterialBiblioteca implements IPrestamo {
     //atributos libro
     private String genero,disponibilidad;
     private int numeroPaginas;
@@ -35,5 +35,15 @@ public class Libro extends MaterialBiblioteca {
         System.out.println("Paginas: "+numeroPaginas);
         System.out.println("Disponiblidad: "+ disponibilidad);
         System.out.println("CODIGO: "+codigo);
+    }
+
+    @Override
+    public void Prestar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void Devolver() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

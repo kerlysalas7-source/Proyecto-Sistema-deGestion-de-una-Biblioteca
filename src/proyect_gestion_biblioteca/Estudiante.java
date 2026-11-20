@@ -6,21 +6,37 @@ package proyect_gestion_biblioteca;
 
 /**
  *
- * @author PC
+ * @KERLY SALAS
  */
 public class Estudiante extends Usuario {
     private String carrera, semestre;
 
-    public Estudiante(String carrera, String semestre, String id, String nombre, String direccionDomicillio, int cedula, int edad) {
-        super(id, nombre, direccionDomicillio, cedula, edad);
+    public String getCarrera() {
+        return carrera;
+    }
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+    public String getSemestre() {
+        return semestre;
+    }
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+    
+    public Estudiante(String carrera, String semestre, String id, String nombre, String direccionDomicilio, int cedula, int edad) {
+        super(id, nombre, direccionDomicilio, cedula, edad);
         this.carrera = carrera;
         this.semestre = semestre;
     }
     
     public void mostrarEstudiante (){
         System.out.println("===ESTUDIANTE===");
-        super.consultarMateriales();
-        super.prestamo();
+        System.out.println("Id: " + getId());
+        System.out.println("Nombre: " + getNombre());
+        System.out.println("Direccion de Domicilio: " + getDireccionDomicilio());
+        System.out.println("Cedula: " + getCedula());
+        System.out.println("Edad: " + getEdad());
         System.out.println("Carrera: " + carrera);
         System.out.println("Semestre: " + semestre);
     }

@@ -8,7 +8,7 @@ package proyect_gestion_biblioteca;
  *
  * @author jairo
  */
-public class Revista extends MaterialBiblioteca{
+public class Revista extends MaterialBiblioteca implements IPrestamo{
     //atributos revista
     private int numeroEdicion;
     private String categoria,disponibilidad;
@@ -34,5 +34,15 @@ public class Revista extends MaterialBiblioteca{
         System.out.println("Categoria: "+categoria);
         System.out.println("Disponiblidad: "+ disponibilidad);
         System.out.println("CODIGO: "+codigo);
+    }
+
+    @Override
+    public void Prestar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void Devolver() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
