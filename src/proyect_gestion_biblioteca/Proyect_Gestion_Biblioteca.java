@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyect_gestion_biblioteca;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 /**
- *
- * @author PC
+ * @JAIRO MASABAMDA, KERLY SALAS, ANDRES VILLACRES
  */
 public class Proyect_Gestion_Biblioteca {
 
@@ -15,6 +15,7 @@ public class Proyect_Gestion_Biblioteca {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Scanner sc = new Scanner (System.in);
     }
     
 }
