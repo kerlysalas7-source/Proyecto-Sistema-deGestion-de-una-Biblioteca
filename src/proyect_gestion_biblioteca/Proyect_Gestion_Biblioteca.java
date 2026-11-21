@@ -25,6 +25,8 @@ public class Proyect_Gestion_Biblioteca {
         ArrayList<Usuario> usuarios = new ArrayList <>();
         ArrayList<MaterialBiblioteca> materiales = new ArrayList<> ();
         ArrayList<Prestamo> prestamos = new ArrayList<>();
+        Biblioteca biblioteca = new Biblioteca ();
+
         int op;
         
         do {
@@ -98,22 +100,32 @@ public class Proyect_Gestion_Biblioteca {
                         }
                         try{
                             BufferedWriter bw = new BufferedWriter (new FileWriter ("MaterialesBiblioteca.txt"));
-                            bw.write("=== MATERIALES PRESTADOS ===");
-                            bw.newLine();
-                            for (Prestamo p : prestamos) {
-                                bw.write("Usuario: " + p.getUsuario().getNombre() + " | Material: " + p.getMaterial().titulo + " | Disponible: " + p.getMaterial().disponibilidad);
-                                bw.newLine();
-                            }
                             bw.write("=== DISPONIBILIDAD GENERAL ===");
                             bw.newLine();
                             for (MaterialBiblioteca mat : materiales) {
-                                bw.write("Codigo: " + mat.codigo + " | Titulo: " + mat.titulo + " | Disponible: " + mat.disponibilidad);
+                                bw.write("Codigo: " + mat.codigo);
+                                bw.write("Titulo: " + mat.titulo);
+                                bw.write("Disponibilidad: " + mat.disponibilidad);
+                                bw.write("Autor: " + mat.autor);
+                                bw.write("Anio de Publicacion: " + mat.anioPublicacion);
                                 bw.newLine();
                             }
                             bw.close();
                             }catch(IOException e){
                                System.out.println("Error al escribir en el archivo");
                             }
+                        try{ 
+                        BufferedReader br = new BufferedReader (new FileReader ("MaterialesBiblioteca.txt"));
+                        String linea;
+                        System.out.println("Datos leidos desde l archivo");
+            
+                         while((linea = br.readLine()) != null){
+                        System.out.println(linea);  
+                        }
+                        br.close();
+                        }catch(IOException e){
+                            System.out.println("Error al leer el archivo");
+                        }
                     }
                     break;
                     
@@ -164,8 +176,41 @@ public class Proyect_Gestion_Biblioteca {
                         }
                     }
                     break;
-                    
+                       
                 case 3:
+                    if (biblioteca.getListaUsuarios().isEmpty() || biblioteca.getListaMateriales().isEmpty()) {
+                    System.out.println("Debe registrar al menos un usuario y un material primero.");
+                    } else {
+                        System.out.print("Ingrese el ID del usuario que consulta: ");
+                        String idUsuario = sc.nextLine();
+                        System.out.print("Ingrese el codigo del material a buscar: ");
+                        int codigoBuscar = sc.nextInt();
+                        sc.nextLine();
+
+                        boolean usuarioEncontrado = false;
+                        for (Usuario usr : biblioteca.getListaUsuarios()) {
+                        if (usr.getId().equals(idUsuario)) {
+                            usr.consultarMateriales(codigoBuscar, biblioteca);
+                            usuarioEncontrado = true;
+                        }
+                    }
+
+                    if (!usuarioEncontrado) {
+                        System.out.println("No se encontro un usuario con el ID: " + idUsuario);
+                        }
+                    }
+                    try{
+                        BufferedReader br = new BufferedReader (new FileReader ("MaterialesBiblioteca.txt"));
+                        String linea;
+                        System.out.println("Datos leidos desde l archivo");
+            
+                         while((linea = br.readLine()) != null){
+                        System.out.println(linea);  
+                        }
+                        br.close();
+                        }catch(IOException e){
+                            System.out.println("Error al leer el archivo");
+                        }
                     break;
                     
                 case 4:

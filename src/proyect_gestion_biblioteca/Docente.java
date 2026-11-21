@@ -27,10 +27,21 @@ public class Docente extends Usuario {
     }
 
     @Override
-    protected void consultarMateriales(int buscarcodigo) {
+    protected void prestamo() {
     }
 
     @Override
-    protected void prestamo() {
+    protected void consultarMateriales(int buscarcodigo, Biblioteca biblioteca) {
+        boolean encontrar = false;
+        
+        for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
+            if(buscarcodigo == mat.codigo){
+                mat.mostrarInformacion();
+                encontrar = true;
+            }
+        }
+        if(!encontrar){
+            System.out.println("No se encontro el codigo del material" + buscarcodigo);
+        }
     }
 }

@@ -50,6 +50,6 @@ public abstract class Usuario {
         this.edad = edad;
     }
     
-    protected abstract void consultarMateriales (int buscarcodigo);
+    protected abstract void consultarMateriales (int buscarcodigo, Biblioteca biblioteca);
     protected abstract void prestamo ();
 }
