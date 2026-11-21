@@ -69,12 +69,12 @@ public class Prestamo implements IPrestamo{
     }
 
     @Override
-    public void Prestar() {
-       System.out.println("Material prestado: " + material.toString() + " a " + usuario.toString()); 
+    public void prestar() {
+        System.out.println("Material prestado: " + material.toString() + " a " + usuario.toString());
     }
 
     @Override
-    public void Devolver() {
-       System.out.println("Material devuelto: " + material.toString()); 
+    public void devolver() {
+        System.out.println("Material devuelto: " + material.toString()); 
     }
 }
