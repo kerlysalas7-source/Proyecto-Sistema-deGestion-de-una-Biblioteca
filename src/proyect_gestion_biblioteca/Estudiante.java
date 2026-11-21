@@ -5,7 +5,6 @@
 package proyect_gestion_biblioteca;
 
 /**
- *
  * @KERLY SALAS
  */
 public class Estudiante extends Usuario {
