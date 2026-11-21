@@ -16,7 +16,7 @@ public class Docente extends Usuario {
         this.especialidad = especialidad;
     }
     public void mostarDocente (){
-        System.out.println("==DOCENTE==");
+        System.out.println("===== DATOS DOCENTE =====");
         System.out.println("Id: " + getId());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Direccion de Domicilio: " + getDireccionDomicilio());

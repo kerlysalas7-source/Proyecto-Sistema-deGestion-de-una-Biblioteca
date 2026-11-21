@@ -31,7 +31,7 @@ public class Estudiante extends Usuario {
     }
     
     public void mostrarEstudiante (){
-        System.out.println("===ESTUDIANTE===");
+        System.out.println("===== DATOS ESTUDIANTE =====");
         System.out.println("Id: " + getId());
         System.out.println("Nombre: " + getNombre());
         System.out.println("Direccion de Domicilio: " + getDireccionDomicilio());
