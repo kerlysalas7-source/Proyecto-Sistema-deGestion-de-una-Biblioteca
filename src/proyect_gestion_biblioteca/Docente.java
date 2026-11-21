@@ -25,4 +25,12 @@ public class Docente extends Usuario {
         System.out.println("Departamento: " + departamento);
         System.out.println("Especialidad: " + especialidad);
     }
+
+    @Override
+    protected void consultarMateriales(int buscarcodigo) {
+    }
+
+    @Override
+    protected void prestamo() {
+    }
 }

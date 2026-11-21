@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyect_gestion_biblioteca;
-
 /**
  * @KERLY SALAS
  */
@@ -38,5 +37,24 @@ public class Estudiante extends Usuario {
         System.out.println("Edad: " + getEdad());
         System.out.println("Carrera: " + carrera);
         System.out.println("Semestre: " + semestre);
+    }
+
+    @Override
+    protected void consultarMateriales(int buscarcodigo, Biblioteca biblioteca) {
+        boolean encontrar = false;
+        
+        for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
+            if(buscarcodigo == mat.codigo){
+                mat.mostrarInformacion();
+                encontrar = true;
+            }
+        }
+        if(!encontrar){
+            System.out.println("No se encontro el codigo del material" + buscarcodigo);
+        }
+    }
+
+    @Override
+    protected void prestamo() {
     }
 }

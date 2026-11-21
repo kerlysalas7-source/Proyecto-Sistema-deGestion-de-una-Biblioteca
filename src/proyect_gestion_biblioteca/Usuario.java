@@ -7,7 +7,7 @@ package proyect_gestion_biblioteca;
  * @KERLY SALAS
  */
 public abstract class Usuario {
-
+    MaterialBiblioteca material ;
     private String id, nombre, direccionDomicilio;
     private int cedula, edad;
 
@@ -41,7 +41,7 @@ public abstract class Usuario {
     public void setEdad(int edad) {
         this.edad = edad;
     }
-
+    
     public Usuario(String id, String nombre, String direccionDomicilio, int cedula, int edad) {
         this.id = id;
         this.nombre = nombre;
@@ -50,10 +50,6 @@ public abstract class Usuario {
         this.edad = edad;
     }
     
-    public void consultarMateriales (){
-        
-    }
-    public void prestamo (){
-        
-    }
+    protected abstract void consultarMateriales (int buscarcodigo);
+    protected abstract void prestamo ();
 }
