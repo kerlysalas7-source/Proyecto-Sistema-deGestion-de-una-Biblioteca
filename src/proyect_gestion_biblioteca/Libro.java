@@ -38,12 +38,12 @@ public class Libro extends MaterialBiblioteca implements IPrestamo {
     }
 
     @Override
-    public void Prestar() {
+    public void prestar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void Devolver() {
+    public void devolver() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

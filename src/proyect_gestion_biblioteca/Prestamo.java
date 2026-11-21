@@ -8,11 +8,20 @@ import java.util.Date;
 /**
  * @KERLY SALAS
  */
-public class Prestamo {
+public class Prestamo implements IPrestamo{
     private Usuario usuario;
     private MaterialBiblioteca material;
     private Date fechaPrestamo, fechaDevolucion;
     private double multa;
+
+   
+    public Prestamo(Usuario usuario, MaterialBiblioteca material, Date fechaPrestamo, Date fechaDevolucion) {
+        this.usuario = usuario;
+        this.material = material;
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaDevolucion = fechaDevolucion;
+        this.multa = 0.0;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -53,15 +62,19 @@ public class Prestamo {
     public void setMulta(double multa) {
         this.multa = multa;
     }
-    
-    public Prestamo() {
+
+    @Override
+    public String toString() {
+        return "Prestamo{" + "usuario=" + usuario + ", material=" + material + ", fechaPrestamo=" + fechaPrestamo + ", fechaDevolucion=" + fechaDevolucion + ", multa=" + multa + '}';
     }
 
-    public Prestamo(Usuario usuario, MaterialBiblioteca material, Date fechaPrestamo, Date fechaDevolucion, double multa) {
-        this.usuario = usuario;
-        this.material = material;
-        this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = fechaDevolucion;
-        this.multa = multa;
-    } 
+    @Override
+    public void Prestar() {
+       System.out.println("Material prestado: " + material.toString() + " a " + usuario.toString()); 
+    }
+
+    @Override
+    public void Devolver() {
+       System.out.println("Material devuelto: " + material.toString()); 
+    }
 }

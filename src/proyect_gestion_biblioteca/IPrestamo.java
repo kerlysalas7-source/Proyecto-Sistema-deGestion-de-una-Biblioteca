@@ -8,6 +8,6 @@ package proyect_gestion_biblioteca;
  * @KERLY SALAS
  */
 public interface IPrestamo {
-    public void Prestar();
-    public void Devolver ();
+    public void prestar();
+    public void devolver ();
 }
