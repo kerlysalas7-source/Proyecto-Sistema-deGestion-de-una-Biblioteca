@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyect_gestion_biblioteca;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * @KERLY SALAS
  */
@@ -55,6 +59,21 @@ public class Estudiante extends Usuario {
     }
 
     @Override
-    protected void prestamo() {
+    protected void solicitarPrestamo(MaterialBiblioteca mat, Biblioteca biblioteca, Date fechaPrestamo) {
+        int prestamosActivos = 0;
+        for (Prestamo p : biblioteca.getListaPrestamos()) {
+            if (p.getUsuario().getId().equals(this.getId())) {
+            prestamosActivos++;
+            }
+        }
+        if (prestamosActivos >= 3) {
+            System.out.println("El estudiante ya alcanzo el limite de 3 prestamos.");
+        }else {
+           mat.disponibilidad = "no disponible"; 
+           Prestamo prestamoactualizado = new Prestamo(this, mat, fechaPrestamo, null);
+           biblioteca.getListaPrestamos().add(prestamoactualizado);
+           prestamoactualizado.prestar();
+           prestamoactualizado.informacionPrestamo();
+        }
     }
 }

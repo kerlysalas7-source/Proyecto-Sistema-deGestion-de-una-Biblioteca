@@ -4,7 +4,6 @@
  */
 package proyect_gestion_biblioteca;
 import java.util.Date;
-
 /**
  * @KERLY SALAS
  */
@@ -13,8 +12,7 @@ public class Prestamo implements IPrestamo{
     private MaterialBiblioteca material;
     private Date fechaPrestamo, fechaDevolucion;
     private double multa;
-
-   
+    
     public Prestamo(Usuario usuario, MaterialBiblioteca material, Date fechaPrestamo, Date fechaDevolucion) {
         this.usuario = usuario;
         this.material = material;
@@ -22,7 +20,6 @@ public class Prestamo implements IPrestamo{
         this.fechaDevolucion = fechaDevolucion;
         this.multa = 0.0;
     }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -63,18 +60,22 @@ public class Prestamo implements IPrestamo{
         this.multa = multa;
     }
 
-    @Override
-    public String toString() {
-        return "Prestamo{" + "usuario=" + usuario + ", material=" + material + ", fechaPrestamo=" + fechaPrestamo + ", fechaDevolucion=" + fechaDevolucion + ", multa=" + multa + '}';
+    public void informacionPrestamo (){
+        System.out.println("===DETALLE DEL PRESTAMO===");
+        System.out.println("Usuario: " + usuario);
+        System.out.println("Material: " + material);
+        System.out.println("Fecha del prestamo: " + fechaPrestamo);
+        System.out.println("Fecha de devolucion: " + fechaDevolucion);
+        System.out.println("Multa: $" + multa);
     }
 
     @Override
     public void prestar() {
-        System.out.println("Material prestado: " + material.toString() + " a " + usuario.toString());
+        System.out.println("Material prestado: " + material + " a " + usuario);
     }
 
     @Override
     public void devolver() {
-        System.out.println("Material devuelto: " + material.toString()); 
+        System.out.println("Material devuelto: " + material); 
     }
 }

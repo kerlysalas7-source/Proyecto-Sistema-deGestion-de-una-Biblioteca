@@ -4,6 +4,8 @@
  */
 package proyect_gestion_biblioteca;
 
+import java.util.Date;
+
 /**
  * @KERLY SALAS
  */
@@ -27,7 +29,22 @@ public class Docente extends Usuario {
     }
 
     @Override
-    protected void prestamo() {
+    protected void solicitarPrestamo(MaterialBiblioteca mat, Biblioteca biblioteca, Date fechaPrestamo) {
+        int prestamosActivos = 0;
+        for (Prestamo p : biblioteca.getListaPrestamos()){
+            if (p.getUsuario().getId().equals(this.getId())){
+                prestamosActivos++;
+            }
+        }
+        if (prestamosActivos >= 5){
+            System.out.println("El docente ya alcanzo el limite de 5 prestamos.");
+        }else{
+            mat.disponibilidad = "no disponible";
+            Prestamo prestamoactualizado = new Prestamo(this, mat, fechaPrestamo, null);
+            biblioteca.getListaPrestamos().add(prestamoactualizado);
+            prestamoactualizado.prestar();
+            prestamoactualizado.informacionPrestamo();
+        }
     }
 
     @Override

@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyect_gestion_biblioteca;
+
+import java.util.Date;
+
 /**
  * @KERLY SALAS
  */
@@ -51,5 +54,5 @@ public abstract class Usuario {
     }
     
     protected abstract void consultarMateriales (int buscarcodigo, Biblioteca biblioteca);
-    protected abstract void prestamo ();
+    protected abstract void solicitarPrestamo (MaterialBiblioteca mat, Biblioteca biblioteca, Date fechaPrestamo);
 }

@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 /**
  * @JAIRO MASABANDA, KERLY SALAS, ANDRES VILLACRES
  */
@@ -214,15 +215,50 @@ public class Proyect_Gestion_Biblioteca {
                     break;
                     
                 case 4:
+                    biblioteca.mostrarUsuarios();
                     break;
                     
                 case 5:
+                    System.out.println("==SOLICITUD DE PRESTAMO==");
+                    System.out.print("Ingrese el ID del usuario: ");
+                    String idPrestamo = sc.nextLine();
+                    System.out.print("Ingrese el codigo del material a prestar: ");
+                    int codPrestamo = sc.nextInt();
+                    sc.nextLine();
+                    
+                    Usuario encontrado = null;
+                    for(Usuario e : biblioteca.getListaUsuarios()){
+                        if(e.getId().equalsIgnoreCase(idPrestamo)){
+                            encontrado = e;
+                        }
+                    }
+                    MaterialBiblioteca me = null;
+                    for(MaterialBiblioteca mate : biblioteca.getListaMateriales()){
+                        if(mate.codigo == codPrestamo){
+                         me = mate;
+                        }
+                    }
+                    
+                    if(encontrado == null){
+                        System.out.println("No hay usuario con ese id");
+                    }else if(me == null){
+                        System.out.println("El material no fue encontrado con ese codigo");
+                    }/*parte de la tesis que no se como hacer
+                    else if(me == ){
+                    }*/
+                    else if(!me.disponibilidad.equalsIgnoreCase("Disponible")){
+                        System.out.println("El material no esta disponible");
+                    }else{
+                        Date fechaPrestamo = new Date ();
+                        encontrado.solicitarPrestamo(me, biblioteca, fechaPrestamo);
+                    }
                     break;
                     
                 case 6:
                     break;
                     
                 case 7:
+                    biblioteca.mostrarPrestamos();
                     break;
                     
                 case 8:
