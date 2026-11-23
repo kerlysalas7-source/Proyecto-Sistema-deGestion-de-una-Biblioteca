@@ -1,0 +1,5 @@
+=== USUARIOS REGISTRADOS ===
+[ESTUDIANTE] ID: E01 | Nombre: Jairo Masabanda | Carrera: Ingenieria en Software | Semestre: Segunda | Cedula: 1728080894 | Edad: 22 | Direccion: Latacunga
+[ESTUDIANTE] ID: E02 | Nombre: Kerly Salas | Carrera: Ingenieria en Software | Semestre: Segundo | Cedula: 1804567891 | Edad: 21 | Direccion: Latacunga
+[ESTUDIANTE] ID: E03 | Nombre: Andres Villacres | Carrera: Ingenieria en Software | Semestre: Segundo | Cedula: 503216549 | Edad: 20 | Direccion: Ambato
+[DOCENTE] ID: D01 | Nombre: Johnny Bastidas | Departamento: Ciencias Exactas | Especialidad: Calculo y Matematica Aplicada | Cedula: 1712345678 | Edad: 40 | Direccion: Ambato

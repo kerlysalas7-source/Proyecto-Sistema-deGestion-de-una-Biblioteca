@@ -9,29 +9,46 @@ package proyect_gestion_biblioteca;
  * @author jairo
  */
 public class Tesis extends MaterialBiblioteca {
-    //atributos tesis
-    private String tema,departamento,disponibilidad;
-    //constructor
-    public Tesis(String tema, String departamento, String disponibilidad, int codigo, int anioPublicacion, String titulo, String autor) {
+    //Atributos
+    private String tema, departamento;
+    //Contructor
+    public Tesis(String tema, String departamento, int codigo, int anioPublicacion, String titulo, String autor) {
         super(codigo, anioPublicacion, titulo, autor);
         this.tema = tema;
         this.departamento = departamento;
-        this.disponibilidad = "disponible";
     }
-    //metodos heredados
+    //Polimorfismo para la multa 
     @Override
-    protected void calcularMulta(int diasRetraso) {
-        
+    public void calcularMulta(int diasRetraso) {
+        double multa = diasRetraso * 1.50;
+        System.out.println("Multa por retraso de la tesis: $" + multa);
     }
+    //Metodos 
     @Override
-    protected void mostrarInformacion() {
-        System.out.println("====== DATOS REVISTA =====");
-        System.out.println("Titulo: "+titulo);
-        System.out.println("Autor: "+autor);
-        System.out.println("Anio publicacion: "+anioPublicacion);
-        System.out.println("Tema: "+tema);
-        System.out.println("Departamento: "+departamento);
-        System.out.println("Disponiblidad: "+ disponibilidad);
-        System.out.println("CODIGO: "+codigo);
+    public void mostrarInformacion() {
+        System.out.println("====== DATOS TESIS =====");
+        System.out.println("Titulo: " + getTitulo());
+        System.out.println("Autor: " + getAutor());
+        System.out.println("Anio publicacion: " + getAnioPublicacion());
+        System.out.println("Tema: " + tema);
+        System.out.println("Departamento: " + departamento);
+        System.out.println("Disponibilidad: " + getDisponibilidad());
+        System.out.println("CODIGO: " + getCodigo());
+    }
+    //Getters y seters
+    public String getTema() {
+        return tema;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 }

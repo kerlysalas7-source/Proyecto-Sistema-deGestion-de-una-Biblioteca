@@ -3,17 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyect_gestion_biblioteca;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 /**
+ *
  * @JAIRO MASABANDA, KERLY SALAS, ANDRES VILLACRES
  */
 public class Proyect_Gestion_Biblioteca {
@@ -22,254 +23,307 @@ public class Proyect_Gestion_Biblioteca {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner (System.in);
-        ArrayList<Usuario> usuarios = new ArrayList <>();
-        ArrayList<MaterialBiblioteca> materiales = new ArrayList<> ();
-        ArrayList<Prestamo> prestamos = new ArrayList<>();
-        Biblioteca biblioteca = new Biblioteca ();
+        Scanner sc = new Scanner(System.in);
+        Biblioteca biblioteca = new Biblioteca();
 
-        int op;
-        
+        int op = 0;
+
         do {
-            System.out.println("===MENU GESTION DE LA BIBLIOTECA===");
-            System.out.println("1. Agregar Material");
-            System.out.println("2. Agregar Usuario");
-            System.out.println("3. Consultar materiales");
-            System.out.println("4. Mostrar Usuarios");
-            System.out.println("5. Solicitar prestamo");
-            System.out.println("6. Devolver material");
-            System.out.println("7. Mostrar prestamo");
-            System.out.println("8. Salir");
-            System.out.print("Escoja una opciion: ");
-            op = sc.nextInt();
-            sc.nextLine();
-            
-            switch (op){
-                case 1:
-                    int m, n;
-                    System.out.println("==Agregar Material==");
-                    System.out.println("1. Libro");
-                    System.out.println("2. Revista");
-                    System.out.println("3. Tesis");
-                    System.out.print("Escoja una opcion: ");
-                    m = sc.nextInt();
-                    sc.nextLine();
-                    if (m < 1 || m > 3){
-                    System.out.println("Opcion no existente");
-                    }else{
-                        System.out.print("Cuantas veces desea agregar el material: ");
-                        n = sc.nextInt();
+            try {
+                System.out.println("===MENU GESTION DE LA BIBLIOTECA===");
+                System.out.println("1. Agregar Material");
+                System.out.println("2. Agregar Usuario");
+                System.out.println("3. Consultar materiales");
+                System.out.println("4. Mostrar Usuarios");
+                System.out.println("5. Solicitar prestamo");
+                System.out.println("6. Devolver material");
+                System.out.println("7. Mostrar prestamo");
+                System.out.println("8. Salir");
+                System.out.print("Escoja una opcion: ");
+                op = sc.nextInt();
+                sc.nextLine();
+
+                switch (op) {
+                    case 1:
+                        int m, n;
+                        System.out.println("==Agregar Material==");
+                        System.out.println("1. Libro");
+                        System.out.println("2. Revista");
+                        System.out.println("3. Tesis");
+                        System.out.print("Escoja una opcion: ");
+                        m = sc.nextInt();
                         sc.nextLine();
-                        for (int i = 0; i < n; i++) {
-                            System.out.println("\nRegistro #" + (i + 1));
-                            System.out.print("Codigo: ");
-                            int codigo = sc.nextInt();
+                        if (m < 1 || m > 3) {
+                            System.out.println("Opcion no existente");
+                        } else {
+                            System.out.print("Cuantas veces desea agregar el material: ");
+                            n = sc.nextInt();
                             sc.nextLine();
-                            System.out.print("Titulo: ");
-                            String titulo = sc.nextLine();
-                            System.out.print("Autor: ");
-                            String autor = sc.nextLine();
-                            System.out.print("Anio de publicacion: ");
-                            int anio = sc.nextInt();
-                            sc.nextLine();
-                            
-                            if(m==1){
-                                System.out.print("Genero: ");
-                                String genero = sc.nextLine();
-                                System.out.print("Numero de paginas: ");
-                                int paginas = sc.nextInt();
+                            for (int i = 0; i < n; i++) {
+                                System.out.println("\nRegistro #" + (i + 1));
+                                System.out.print("Codigo: ");
+                                int codigo = sc.nextInt();
                                 sc.nextLine();
-                                materiales.add(new Libro(genero, paginas, codigo, anio, titulo, autor));
-                            }else if(m==2){
-                                System.out.print("Numero de edicion: ");
-                                int edicion = sc.nextInt();
+                                System.out.print("Titulo: ");
+                                String titulo = sc.nextLine();
+                                System.out.print("Autor: ");
+                                String autor = sc.nextLine();
+                                System.out.print("Anio de publicacion: ");
+                                int anio = sc.nextInt();
                                 sc.nextLine();
-                                System.out.print("Categoria: ");
-                                String categoria = sc.nextLine();
-                                System.out.print("Disponibilidad: ");
-                                String disponibilidad = sc.nextLine();
-                                materiales.add(new Revista(edicion, categoria, disponibilidad, codigo, anio, titulo, autor));
-                            }else {
-                                System.out.print("Tema: ");
-                                String tema = sc.nextLine();
-                                System.out.print("Departamento: ");
-                                String departamento = sc.nextLine();
-                                System.out.print("Disponibilidad: ");
-                                String disponibilidad = sc.nextLine();
-                                materiales.add(new Tesis(tema, departamento, disponibilidad, codigo, anio, titulo, autor));
-                             }
-                        }
-                        try{
-                            BufferedWriter bw = new BufferedWriter (new FileWriter ("MaterialesBiblioteca.txt"));
-                            bw.write("=== DISPONIBILIDAD GENERAL ===");
-                            bw.newLine();
-                            for (MaterialBiblioteca mat : materiales) {
-                                bw.write("Codigo: " + mat.codigo);
-                                bw.write("Titulo: " + mat.titulo);
-                                bw.write("Disponibilidad: " + mat.disponibilidad);
-                                bw.write("Autor: " + mat.autor);
-                                bw.write("Anio de Publicacion: " + mat.anioPublicacion);
-                                bw.newLine();
+
+                                if (m == 1) {
+                                    System.out.print("Genero: ");
+                                    String genero = sc.nextLine();
+                                    System.out.print("Numero de paginas: ");
+                                    int paginas = sc.nextInt();
+                                    sc.nextLine();
+                                    biblioteca.agregarMaterial(new Libro(genero, paginas, codigo, anio, titulo, autor));
+                                } else if (m == 2) {
+                                    System.out.print("Numero de edicion: ");
+                                    int edicion = sc.nextInt();
+                                    sc.nextLine();
+                                    System.out.print("Categoria: ");
+                                    String categoria = sc.nextLine();
+                                    biblioteca.agregarMaterial(new Revista(edicion, categoria, codigo, anio, titulo, autor));
+                                } else {
+                                    System.out.print("Tema: ");
+                                    String tema = sc.nextLine();
+                                    System.out.print("Departamento: ");
+                                    String departamento = sc.nextLine();
+                                    biblioteca.agregarMaterial(new Tesis(tema, departamento, codigo, anio, titulo, autor));
+                                }
                             }
-                            bw.close();
-                            }catch(IOException e){
-                               System.out.println("Error al escribir en el archivo");
-                            }
-                        try{ 
-                        BufferedReader br = new BufferedReader (new FileReader ("MaterialesBiblioteca.txt"));
-                        String linea;
-                        System.out.println("Datos leidos desde l archivo");
-            
-                         while((linea = br.readLine()) != null){
-                        System.out.println(linea);  
+                            guardarArchivo(biblioteca);
+                            leerArchivo();
                         }
-                        br.close();
-                        }catch(IOException e){
-                            System.out.println("Error al leer el archivo");
-                        }
-                    }
-                    break;
-                    
-                case 2:
-                    int u, c;
-                    System.out.println("==Agregar Ususuario==");
-                    System.out.println("1. Estudiante");
-                    System.out.println("2. Docente");
-                    System.out.print("Ecoja una opcion: ");
-                    u = sc.nextInt();
-                    sc.nextLine();
-                    
-                    if(u < 1 || u > 2){
-                        System.out.println("Esa opcion no existe");
-                    }else{
-                        System.out.println("Cuantos desea agregar?");
-                        c = sc.nextInt();
-                        sc.nextLine();
-                        for (int i = 0; i < c; i++) {
-                            System.out.print("ID: ");
-                            String id = sc.nextLine();
-                            System.out.print("Nombre: ");
-                            String nombre = sc.nextLine();
-                            System.out.print("Direccion Domiccilio: ");
-                            String direccionDomicilio = sc.nextLine();
-                            System.out.print("Cedula: ");
-                            int cedula = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Edad: ");
-                            int edad = sc.nextInt();
-                            sc.nextLine();
-                            
-                            if(u == 1){
-                                System.out.print("Carrera: ");
-                                String carrera = sc.nextLine();
-                                System.out.print("Semestre: ");
-                                String semestre = sc.nextLine();
-                                
-                                usuarios.add(new Estudiante(carrera, semestre, id, nombre, direccionDomicilio, cedula, edad));
-                            }else{
-                                System.out.print("Departamento: ");
-                                String departamento = sc.nextLine();
-                                System.out.print("Especialidad: ");
-                                String especialidad = sc.nextLine();
-                                
-                                usuarios.add(new Docente(departamento, especialidad, id, nombre, direccionDomicilio, cedula, edad));
-                            }
-                        }
-                    }
-                    break;
-                       
-                case 3:
-                    if (biblioteca.getListaUsuarios().isEmpty() || biblioteca.getListaMateriales().isEmpty()) {
-                    System.out.println("Debe registrar al menos un usuario y un material primero.");
-                    } else {
-                        System.out.print("Ingrese el ID del usuario que consulta: ");
-                        String idUsuario = sc.nextLine();
-                        System.out.print("Ingrese el codigo del material a buscar: ");
-                        int codigoBuscar = sc.nextInt();
+                        break;
+
+                    case 2:
+                        int u, c;
+                        System.out.println("==Agregar Usuario==");
+                        System.out.println("1. Estudiante");
+                        System.out.println("2. Docente");
+                        System.out.print("Escoja una opcion: ");
+                        u = sc.nextInt();
                         sc.nextLine();
 
-                        boolean usuarioEncontrado = false;
-                        for (Usuario usr : biblioteca.getListaUsuarios()) {
-                        if (usr.getId().equals(idUsuario)) {
-                            usr.consultarMateriales(codigoBuscar, biblioteca);
-                            usuarioEncontrado = true;
-                        }
-                    }
+                        if (u < 1 || u > 2) {
+                            System.out.println("Esa opcion no existe");
+                        } else {
+                            System.out.println("Cuantos desea agregar?");
+                            c = sc.nextInt();
+                            sc.nextLine();
+                            for (int i = 0; i < c; i++) {
+                                System.out.print("ID: ");
+                                String id = sc.nextLine();
+                                System.out.print("Nombre: ");
+                                String nombre = sc.nextLine();
+                                System.out.print("Direccion Domicilio: ");
+                                String direccionDomicilio = sc.nextLine();
+                                System.out.print("Cedula: ");
+                                int cedula = sc.nextInt();
+                                sc.nextLine();
+                                System.out.print("Edad: ");
+                                int edad = sc.nextInt();
+                                sc.nextLine();
 
-                    if (!usuarioEncontrado) {
-                        System.out.println("No se encontro un usuario con el ID: " + idUsuario);
+                                if (u == 1) {
+                                    System.out.print("Carrera: ");
+                                    String carrera = sc.nextLine();
+                                    System.out.print("Semestre: ");
+                                    String semestre = sc.nextLine();
+                                    biblioteca.agregarUsuario(new Estudiante(carrera, semestre, id, nombre, direccionDomicilio, cedula, edad));
+                                } else {
+                                    System.out.print("Departamento: ");
+                                    String departamento = sc.nextLine();
+                                    System.out.print("Especialidad: ");
+                                    String especialidad = sc.nextLine();
+                                    biblioteca.agregarUsuario(new Docente(departamento, especialidad, id, nombre, direccionDomicilio, cedula, edad));
+                                }
+                            }
+                            guardarUsuarios(biblioteca);
+                            leerUsuarios();
                         }
-                    }
-                    try{
-                        BufferedReader br = new BufferedReader (new FileReader ("MaterialesBiblioteca.txt"));
-                        String linea;
-                        System.out.println("Datos leidos desde l archivo");
-            
-                         while((linea = br.readLine()) != null){
-                        System.out.println(linea);  
+                        break;
+
+                    case 3:
+                        biblioteca.mostrarMateriales();
+                        leerArchivo();
+                        break;
+
+                    case 4:
+                        biblioteca.mostrarUsuarios();
+                        leerUsuarios();
+                        break;
+
+                    case 5:
+                        System.out.println("==SOLICITUD DE PRESTAMO==");
+                        System.out.print("Ingrese el ID del usuario: ");
+                        String idPrestamo = sc.nextLine();
+                        System.out.print("Ingrese el codigo del material a prestar: ");
+                        int codPrestamo = sc.nextInt();
+                        sc.nextLine();
+
+                        Usuario encontrado = null;
+                        for (Usuario e : biblioteca.getListaUsuarios()) {
+                            if (e.getId().equalsIgnoreCase(idPrestamo)) {
+                                encontrado = e;
+                            }
                         }
-                        br.close();
-                        }catch(IOException e){
-                            System.out.println("Error al leer el archivo");
+                        MaterialBiblioteca me = null;
+                        for (MaterialBiblioteca mate : biblioteca.getListaMateriales()) {
+                            if (mate.getCodigo() == codPrestamo) {
+                                me = mate;
+                            }
                         }
-                    break;
-                    
-                case 4:
-                    biblioteca.mostrarUsuarios();
-                    break;
-                    
-                case 5:
-                    System.out.println("==SOLICITUD DE PRESTAMO==");
-                    System.out.print("Ingrese el ID del usuario: ");
-                    String idPrestamo = sc.nextLine();
-                    System.out.print("Ingrese el codigo del material a prestar: ");
-                    int codPrestamo = sc.nextInt();
-                    sc.nextLine();
-                    
-                    Usuario encontrado = null;
-                    for(Usuario e : biblioteca.getListaUsuarios()){
-                        if(e.getId().equalsIgnoreCase(idPrestamo)){
-                            encontrado = e;
+
+                        if (encontrado == null) {
+                            throw new IllegalArgumentException("No hay usuario con ese id");
+                        } else if (me == null) {
+                            throw new IllegalArgumentException("El material no fue encontrado con ese codigo");
+                        } else if (me instanceof Tesis) {
+                            throw new IllegalStateException("Las tesis no estan disponibles para prestamo");
+                        } else if (!me.getDisponibilidad().equalsIgnoreCase("Disponible")) {
+                            throw new IllegalStateException("El material no esta disponible");
+                        } else {
+                            Date fechaPrestamo = new Date();
+                            encontrado.solicitarPrestamo(me, biblioteca, fechaPrestamo);
+                            guardarArchivo(biblioteca);
                         }
-                    }
-                    MaterialBiblioteca me = null;
-                    for(MaterialBiblioteca mate : biblioteca.getListaMateriales()){
-                        if(mate.codigo == codPrestamo){
-                         me = mate;
+                        break;
+
+                    case 6:
+                        System.out.println("==DEVOLUCION DE MATERIAL==");
+                        System.out.print("Ingrese el ID del usuario: ");
+                        String idDev = sc.nextLine();
+                        System.out.print("Ingrese el codigo del material a devolver: ");
+                        int codDev = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Ingrese dias de retraso (0 si entrego a tiempo): ");
+                        int diasRetraso = sc.nextInt();
+                        sc.nextLine();
+
+                        if (diasRetraso < 0) {
+                            throw new IllegalArgumentException("Los dias de retraso no pueden ser negativos.");
                         }
-                    }
-                    
-                    if(encontrado == null){
-                        System.out.println("No hay usuario con ese id");
-                    }else if(me == null){
-                        System.out.println("El material no fue encontrado con ese codigo");
-                    }/*parte de la tesis que no se como hacer
-                    else if(me == ){
-                    }*/
-                    else if(!me.disponibilidad.equalsIgnoreCase("Disponible")){
-                        System.out.println("El material no esta disponible");
-                    }else{
-                        Date fechaPrestamo = new Date ();
-                        encontrado.solicitarPrestamo(me, biblioteca, fechaPrestamo);
-                    }
-                    break;
-                    
-                case 6:
-                    break;
-                    
-                case 7:
-                    biblioteca.mostrarPrestamos();
-                    break;
-                    
-                case 8:
-                    System.out.println("Saliendo....");
-                    break;
-                    
-                default:
-                    System.out.println("Escoja una opcion valida o existente");
-                    break;
+
+                        Prestamo prestamoDevolver = null;
+                        for (Prestamo p : biblioteca.getListaPrestamos()) {
+                            if (p.getUsuario().getId().equalsIgnoreCase(idDev) && p.getMaterial().getCodigo() == codDev) {
+                                prestamoDevolver = p;
+                                break;
+                            }
+                        }
+
+                        if (prestamoDevolver == null) {
+                            throw new IllegalArgumentException("No existe un prestamo activo con ese usuario y codigo de material.");
+                        }
+
+                        if (diasRetraso > 0) {
+                            prestamoDevolver.getMaterial().calcularMulta(diasRetraso);
+                        }
+
+                        biblioteca.devolverMaterial(prestamoDevolver);
+                        guardarArchivo(biblioteca);
+                        break;
+
+                    case 7:
+                        biblioteca.mostrarPrestamos();
+                        break;
+
+                    case 8:
+                        System.out.println("Saliendo....");
+                        break;
+
+                    default:
+                        System.out.println("Escoja una opcion valida o existente");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Debe ingresar un dato numerico valido.");
+                sc.nextLine();
+                op = 0;
+            } catch (IllegalArgumentException | IllegalStateException e) {
+                System.out.println("Error: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error inesperado: " + e.getMessage());
             }
-            
-        } while (op!=8);
-    }  
+
+        } while (op != 8);
+    }
+
+    public static void guardarArchivo(Biblioteca biblioteca) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("MaterialesBiblioteca.txt"));
+            bw.write("=== DISPONIBILIDAD GENERAL ===");
+            bw.newLine();
+            for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
+                bw.write("Codigo: " + mat.getCodigo());
+                bw.write(" | Titulo: " + mat.getTitulo());
+                bw.write(" | Disponibilidad: " + mat.getDisponibilidad());
+                bw.write(" | Autor: " + mat.getAutor());
+                bw.write(" | Anio de Publicacion: " + mat.getAnioPublicacion());
+                bw.newLine();
+            }
+            bw.newLine();
+            bw.write("=== MATERIALES PRESTADOS A USUARIOS ===");
+            bw.newLine();
+            for (Prestamo p : biblioteca.getListaPrestamos()) {
+                bw.write("Usuario: " + p.getUsuario().getNombre() + " (ID: " + p.getUsuario().getId() + ")");
+                bw.write(" -> Material: " + p.getMaterial().getTitulo() + " (Codigo: " + p.getMaterial().getCodigo() + ")");
+                bw.write(" | Estado: " + p.getMaterial().getDisponibilidad());
+                bw.newLine();
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo");
+        }
+    }
+
+    public static void leerArchivo() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("MaterialesBiblioteca.txt"));
+            String linea;
+            System.out.println("Datos leidos desde el archivo:");
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo");
+        }
+    }
+
+    public static void guardarUsuarios(Biblioteca biblioteca) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("UsuariosBiblioteca.txt"));
+            bw.write("=== USUARIOS REGISTRADOS ===");
+            bw.newLine();
+            for (Usuario u : biblioteca.getListaUsuarios()) {
+                bw.write(u.toString());
+                bw.write(" | Cedula: " + u.getCedula());
+                bw.write(" | Edad: " + u.getEdad());
+                bw.write(" | Direccion: " + u.getDireccionDomicilio());
+                bw.newLine();
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo de usuarios");
+        }
+    }
+
+    public static void leerUsuarios() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("UsuariosBiblioteca.txt"));
+            String linea;
+            System.out.println("Datos de usuarios leidos desde el archivo:");
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo de usuarios");
+        }
+    }
 }

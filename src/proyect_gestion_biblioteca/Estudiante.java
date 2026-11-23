@@ -11,28 +11,32 @@ import java.util.Date;
  * @KERLY SALAS
  */
 public class Estudiante extends Usuario {
+    //atributos
     private String carrera, semestre;
-
-    public String getCarrera() {
-        return carrera;
-    }
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-    public String getSemestre() {
-        return semestre;
-    }
-    public void setSemestre(String semestre) {
-        this.semestre = semestre;
-    }
-    
+    //Constructor
     public Estudiante(String carrera, String semestre, String id, String nombre, String direccionDomicilio, int cedula, int edad) {
         super(id, nombre, direccionDomicilio, cedula, edad);
         this.carrera = carrera;
         this.semestre = semestre;
     }
-    
-    public void mostrarEstudiante (){
+    //Getters y Setters
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+    //Metodos
+    public void mostrarEstudiante() {
         System.out.println("===== DATOS ESTUDIANTE =====");
         System.out.println("Id: " + getId());
         System.out.println("Nombre: " + getNombre());
@@ -42,19 +46,19 @@ public class Estudiante extends Usuario {
         System.out.println("Carrera: " + carrera);
         System.out.println("Semestre: " + semestre);
     }
-
+    //Metodos heredados y excepciones thr y thrs
     @Override
     protected void consultarMateriales(int buscarcodigo, Biblioteca biblioteca) {
         boolean encontrar = false;
-        
+
         for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
-            if(buscarcodigo == mat.codigo){
+            if (buscarcodigo == mat.getCodigo()) {
                 mat.mostrarInformacion();
                 encontrar = true;
             }
         }
-        if(!encontrar){
-            System.out.println("No se encontro el codigo del material" + buscarcodigo);
+        if (!encontrar) {
+            System.out.println("No se encontro el codigo del material " + buscarcodigo);
         }
     }
 
@@ -63,17 +67,20 @@ public class Estudiante extends Usuario {
         int prestamosActivos = 0;
         for (Prestamo p : biblioteca.getListaPrestamos()) {
             if (p.getUsuario().getId().equals(this.getId())) {
-            prestamosActivos++;
+                prestamosActivos++;
             }
         }
         if (prestamosActivos >= 3) {
-            System.out.println("El estudiante ya alcanzo el limite de 3 prestamos.");
-        }else {
-           mat.disponibilidad = "no disponible"; 
-           Prestamo prestamoactualizado = new Prestamo(this, mat, fechaPrestamo, null);
-           biblioteca.getListaPrestamos().add(prestamoactualizado);
-           prestamoactualizado.prestar();
-           prestamoactualizado.informacionPrestamo();
+            throw new IllegalStateException("El estudiante ya alcanzo el limite de 3 prestamos.");
         }
+        Prestamo prestamoactualizado = new Prestamo(this, mat, fechaPrestamo, null);
+        prestamoactualizado.prestar();
+        biblioteca.getListaPrestamos().add(prestamoactualizado);
+        prestamoactualizado.informacionPrestamo();
+    }
+    //Ya explicque en Docente para que sirve leeran
+    @Override
+    public String toString() {
+        return "[ESTUDIANTE] ID: " + getId() + " | Nombre: " + getNombre() + " | Carrera: " + carrera + " | Semestre: " + semestre;
     }
 }

@@ -3,17 +3,17 @@ package proyect_gestion_biblioteca;
 import java.util.ArrayList;
 
 public class Biblioteca {
-
+    //Atributos
     private ArrayList<Usuario> listaUsuarios;
     private ArrayList<MaterialBiblioteca> listaMateriales;
     private ArrayList<Prestamo> listaPrestamos;
-
+    //Constructor
     public Biblioteca() {
         this.listaUsuarios = new ArrayList<>();
         this.listaMateriales = new ArrayList<>();
         this.listaPrestamos = new ArrayList<>();
     }
-
+    //Getters y Setters
     public void agregarUsuario(Usuario usuario) {
         listaUsuarios.add(usuario);
     }
@@ -26,34 +26,46 @@ public class Biblioteca {
         prestamo.prestar();
         listaPrestamos.add(prestamo);
     }
-
+    //metodos con las excepciones con Throw y Throws
     public void devolverMaterial(Prestamo prestamo) {
         if (listaPrestamos.contains(prestamo)) {
             prestamo.devolver();
             listaPrestamos.remove(prestamo);
         } else {
-            System.out.println("El prestamo no se encuentra registrado.");
+            throw new IllegalArgumentException("El prestamo no existe o ya fue devuelto.");
         }
     }
 
     public void mostrarUsuarios() {
-        for (Usuario u : listaUsuarios) {
-            System.out.println(u.toString());
+        if (listaUsuarios.isEmpty()) {
+            System.out.println("No hay usuarios registrados.");
+        } else {
+            for (Usuario u : listaUsuarios) {
+                System.out.println(u.toString());
+            }
         }
     }
 
     public void mostrarMateriales() {
-        for (MaterialBiblioteca m : listaMateriales) {
-            System.out.println(m.toString());
+        if (listaMateriales.isEmpty()) {
+            System.out.println("No hay materiales registrados.");
+        } else {
+            for (MaterialBiblioteca m : listaMateriales) {
+                m.mostrarInformacion();
+            }
         }
     }
 
     public void mostrarPrestamos() {
-        for (Prestamo p : listaPrestamos) {
-            System.out.println(p.toString());
+        if (listaPrestamos.isEmpty()) {
+            System.out.println("No hay prestamos registrados.");
+        } else {
+            for (Prestamo p : listaPrestamos) {
+                p.informacionPrestamo();
+            }
         }
     }
-
+    //Getters y setters
     public ArrayList<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }

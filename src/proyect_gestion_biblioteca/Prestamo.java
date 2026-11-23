@@ -8,11 +8,12 @@ import java.util.Date;
  * @KERLY SALAS
  */
 public class Prestamo implements IPrestamo{
+    //Atributos :)
     private Usuario usuario;
     private MaterialBiblioteca material;
     private Date fechaPrestamo, fechaDevolucion;
     private double multa;
-    
+    //Constructor para para sacar la multa por retraso
     public Prestamo(Usuario usuario, MaterialBiblioteca material, Date fechaPrestamo, Date fechaDevolucion) {
         this.usuario = usuario;
         this.material = material;
@@ -20,6 +21,7 @@ public class Prestamo implements IPrestamo{
         this.fechaDevolucion = fechaDevolucion;
         this.multa = 0.0;
     }
+    //Getters y setters
     public Usuario getUsuario() {
         return usuario;
     }
@@ -59,11 +61,11 @@ public class Prestamo implements IPrestamo{
     public void setMulta(double multa) {
         this.multa = multa;
     }
-
-    public void informacionPrestamo (){
+    //Metodo y la excepcion
+    public void informacionPrestamo() {
         System.out.println("===DETALLE DEL PRESTAMO===");
-        System.out.println("Usuario: " + usuario);
-        System.out.println("Material: " + material);
+        System.out.println("Usuario: " + usuario.getNombre());
+        System.out.println("Material: " + material.getTitulo());
         System.out.println("Fecha del prestamo: " + fechaPrestamo);
         System.out.println("Fecha de devolucion: " + fechaDevolucion);
         System.out.println("Multa: $" + multa);
@@ -71,11 +73,22 @@ public class Prestamo implements IPrestamo{
 
     @Override
     public void prestar() {
-        System.out.println("Material prestado: " + material + " a " + usuario);
+        if (!(material instanceof IPrestamo)) {
+            throw new IllegalStateException("Este tipo de material no se puede prestar.");
+        }
+        if (!material.getDisponibilidad().equalsIgnoreCase("Disponible")) {
+            throw new IllegalStateException("El material no esta disponible.");
+        }
+        ((IPrestamo) material).prestar();
+        System.out.println("Material prestado: " + material.getTitulo() + " a " + usuario.getNombre());
     }
 
     @Override
     public void devolver() {
-        System.out.println("Material devuelto: " + material); 
+        if (material instanceof IPrestamo) {
+            ((IPrestamo) material).devolver();
+        }
+        this.fechaDevolucion = new Date();
+        System.out.println("Material devuelto: " + material.getTitulo());
     }
 }
