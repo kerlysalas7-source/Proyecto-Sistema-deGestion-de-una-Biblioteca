@@ -1,0 +1,4 @@
+=== MATERIALES PRESTADOS ===
+=== DISPONIBILIDAD GENERAL ===
+Codigo: 1 | Titulo: peter pan | Disponible: Disponible
+Codigo: 2 | Titulo: principito | Disponible: Disponible
