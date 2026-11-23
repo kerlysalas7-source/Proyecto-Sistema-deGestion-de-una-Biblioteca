@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public abstract class Usuario {
     //Atributos protegidos por la calse abstract
-    MaterialBiblioteca material ;
+    protected MaterialBiblioteca material ;
     protected String id, nombre, direccionDomicilio;
     protected int cedula, edad;
     //Getters y setters

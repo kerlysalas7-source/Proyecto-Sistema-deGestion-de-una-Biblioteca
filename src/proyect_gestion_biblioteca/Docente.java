@@ -77,9 +77,4 @@ public class Docente extends Usuario {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-    //Compañeros Esto sirver para convertir un objeto en texto String a una solo linea para guardar datos direcatmente ayuda de la ia
-    @Override
-    public String toString() {
-        return "[DOCENTE] ID: " + getId() + " | Nombre: " + getNombre() + " | Departamento: " + departamento + " | Especialidad: " + especialidad;
-    }
 }

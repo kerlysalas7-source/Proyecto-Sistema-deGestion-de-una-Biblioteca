@@ -271,7 +271,7 @@ public class Proyect_Gestion_Biblioteca {
             bw.newLine();
             for (Prestamo p : biblioteca.getListaPrestamos()) {
                 bw.write("Usuario: " + p.getUsuario().getNombre() + " (ID: " + p.getUsuario().getId() + ")");
-                bw.write(" -> Material: " + p.getMaterial().getTitulo() + " (Codigo: " + p.getMaterial().getCodigo() + ")");
+                bw.write(" Material: " + p.getMaterial().getTitulo() + " (Codigo: " + p.getMaterial().getCodigo() + ")");
                 bw.write(" | Estado: " + p.getMaterial().getDisponibilidad());
                 bw.newLine();
             }

@@ -50,7 +50,6 @@ public class Estudiante extends Usuario {
     @Override
     protected void consultarMateriales(int buscarcodigo, Biblioteca biblioteca) {
         boolean encontrar = false;
-
         for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
             if (buscarcodigo == mat.getCodigo()) {
                 mat.mostrarInformacion();
@@ -77,10 +76,5 @@ public class Estudiante extends Usuario {
         prestamoactualizado.prestar();
         biblioteca.getListaPrestamos().add(prestamoactualizado);
         prestamoactualizado.informacionPrestamo();
-    }
-    //Ya explicque en Docente para que sirve leeran
-    @Override
-    public String toString() {
-        return "[ESTUDIANTE] ID: " + getId() + " | Nombre: " + getNombre() + " | Carrera: " + carrera + " | Semestre: " + semestre;
     }
 }

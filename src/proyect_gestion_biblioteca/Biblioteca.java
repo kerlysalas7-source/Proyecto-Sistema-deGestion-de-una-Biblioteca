@@ -28,12 +28,7 @@ public class Biblioteca {
     }
     //metodos con las excepciones con Throw y Throws
     public void devolverMaterial(Prestamo prestamo) {
-        if (listaPrestamos.contains(prestamo)) {
-            prestamo.devolver();
-            listaPrestamos.remove(prestamo);
-        } else {
-            throw new IllegalArgumentException("El prestamo no existe o ya fue devuelto.");
-        }
+
     }
 
     public void mostrarUsuarios() {
