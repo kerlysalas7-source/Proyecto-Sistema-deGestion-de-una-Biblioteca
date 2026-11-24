@@ -28,7 +28,8 @@ public class Biblioteca {
     }
     //metodos con las excepciones con Throw y Throws
     public void devolverMaterial(Prestamo prestamo) {
-
+        prestamo.getMaterial().disponibilidad = "Disponible";
+        listaPrestamos.remove(prestamo);
     }
 
     public void mostrarUsuarios() {

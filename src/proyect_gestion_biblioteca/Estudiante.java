@@ -74,6 +74,7 @@ public class Estudiante extends Usuario {
         }
         Prestamo prestamoactualizado = new Prestamo(this, mat, fechaPrestamo, null);
         prestamoactualizado.prestar();
+        mat.disponibilidad = "Prestado";
         biblioteca.getListaPrestamos().add(prestamoactualizado);
         prestamoactualizado.informacionPrestamo();
     }

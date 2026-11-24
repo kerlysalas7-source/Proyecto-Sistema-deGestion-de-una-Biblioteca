@@ -14,10 +14,6 @@ public abstract class MaterialBiblioteca {
     protected String titulo, autor, disponibilidad;
     //Constructor con excepcion en el año de publicacion
     public MaterialBiblioteca(int codigo, int anioPublicacion, String titulo, String autor) {
-        if (anioPublicacion <= 0 || anioPublicacion > 2027) {
-            throw new IllegalArgumentException("Anio de publicacion no valido");
-            //IllegalArgumentException es una excepcion para un error fuera de un rango
-        }
         this.codigo = codigo;
         this.anioPublicacion = anioPublicacion;
         this.titulo = titulo;
@@ -35,9 +31,6 @@ public abstract class MaterialBiblioteca {
         return anioPublicacion;
     }
     public void setAnioPublicacion(int anioPublicacion) {
-        if (anioPublicacion <= 0 || anioPublicacion > 2027) {
-            throw new IllegalArgumentException("Anio de publicacion no valido");
-        }
         this.anioPublicacion = anioPublicacion;
     }
     public String getTitulo() {

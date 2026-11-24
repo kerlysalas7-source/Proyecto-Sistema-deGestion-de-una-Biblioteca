@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyect_gestion_biblioteca;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -94,8 +93,32 @@ public class Proyect_Gestion_Biblioteca {
                                     biblioteca.agregarMaterial(new Tesis(tema, departamento, codigo, anio, titulo, autor));
                                 }
                             }
-                            guardarArchivo(biblioteca);
-                            leerArchivo();
+                            try{
+                            BufferedWriter bw = new BufferedWriter (new FileWriter ("MaterialesBiblioteca.txt", true));
+                            bw.newLine();
+                            for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
+                                bw.write("Codigo: " + mat.codigo);
+                                bw.write(" | Titulo: " + mat.titulo);
+                                bw.write(" | Autor: " + mat.autor);
+                                bw.write(" | Anio de Publicacion: " + mat.anioPublicacion);
+                                bw.newLine();
+                            }
+                            bw.close();
+                            }catch(IOException e){
+                               System.out.println("Error al escribir en el archivo");
+                            }
+                        try{ 
+                        BufferedReader br = new BufferedReader (new FileReader ("MaterialesBiblioteca.txt"));
+                        String linea;
+                        System.out.println("Datos leidos desde el archivo");
+            
+                         while((linea = br.readLine()) != null){
+                        System.out.println(linea);  
+                        }
+                        br.close();
+                        }catch(IOException e){
+                            System.out.println("Error al leer el archivo");
+                            }
                         }
                         break;
 
@@ -111,10 +134,12 @@ public class Proyect_Gestion_Biblioteca {
                         if (u < 1 || u > 2) {
                             System.out.println("Esa opcion no existe");
                         } else {
-                            System.out.println("Cuantos desea agregar?");
+                            System.out.print("Cuantos desea agregar?: ");
                             c = sc.nextInt();
                             sc.nextLine();
+                            int edad = 0;
                             for (int i = 0; i < c; i++) {
+                                System.out.println("\nRegistro #" + (i + 1));
                                 System.out.print("ID: ");
                                 String id = sc.nextLine();
                                 System.out.print("Nombre: ");
@@ -124,9 +149,17 @@ public class Proyect_Gestion_Biblioteca {
                                 System.out.print("Cedula: ");
                                 int cedula = sc.nextInt();
                                 sc.nextLine();
-                                System.out.print("Edad: ");
-                                int edad = sc.nextInt();
-                                sc.nextLine();
+                                boolean edadv = false;
+                                while (!edadv){
+                                    System.out.print("Edad: ");
+                                    edad = sc.nextInt();
+                                    sc.nextLine();
+                                    if(edad < 0 || edad > 100 ){
+                                        System.out.println("Edad fuera de rango");
+                                    }else{
+                                        edadv = true;
+                                    }
+                                }
 
                                 if (u == 1) {
                                     System.out.print("Carrera: ");
@@ -142,19 +175,49 @@ public class Proyect_Gestion_Biblioteca {
                                     biblioteca.agregarUsuario(new Docente(departamento, especialidad, id, nombre, direccionDomicilio, cedula, edad));
                                 }
                             }
-                            guardarUsuarios(biblioteca);
-                            leerUsuarios();
+                            try{
+                                BufferedWriter bw = new BufferedWriter (new FileWriter ("Usuarios.txt", true));
+                                for (Usuario user : biblioteca.getListaUsuarios()){
+                                    bw.write("ID: " + user.getId());
+                                    bw.write(" | Nombre: " + user.getNombre());
+                                    bw.write(" | Cedula: " + user.getCedula());
+                                    bw.write(" | Edad: " + user.getEdad());
+                                    bw.write(" | Direccion: " + user.getDireccionDomicilio());
+                                    bw.newLine();
+                                }
+                                    bw.close();
+                            }catch (Exception e){
+                                System.out.println("No se pudo escribir en el archivo");
+                            }
                         }
                         break;
 
                     case 3:
-                        biblioteca.mostrarMateriales();
-                        leerArchivo();
+                        try {
+                        BufferedReader br = new BufferedReader(new FileReader("MaterialesBiblioteca.txt"));
+                        String linea;
+                        System.out.println("Datos de usuarios leidos desde el archivo:");
+                        while ((linea = br.readLine()) != null) {
+                            System.out.println(linea);
+                        }
+                        br.close();
+                        }catch (IOException e) {
+                            System.out.println("Error al leer el archivo de MaterialesBiblioteca");
+                        }
                         break;
 
                     case 4:
-                        biblioteca.mostrarUsuarios();
-                        leerUsuarios();
+                        try {
+                            BufferedReader br = new BufferedReader(new FileReader("Usuarios.txt"));
+                            String linea;
+                            System.out.println("Datos Guardados del Usuario");
+                            while((linea = br.readLine()) != null){
+                                System.out.println(linea);
+                            }
+                            br.close();
+                        }catch (Exception e){
+                            System.out.println("Error al leer el archivo de Usuarios");
+                        }
                         break;
 
                     case 5:
@@ -182,14 +245,12 @@ public class Proyect_Gestion_Biblioteca {
                             throw new IllegalArgumentException("No hay usuario con ese id");
                         } else if (me == null) {
                             throw new IllegalArgumentException("El material no fue encontrado con ese codigo");
-                        } else if (me instanceof Tesis) {
-                            throw new IllegalStateException("Las tesis no estan disponibles para prestamo");
                         } else if (!me.getDisponibilidad().equalsIgnoreCase("Disponible")) {
                             throw new IllegalStateException("El material no esta disponible");
                         } else {
                             Date fechaPrestamo = new Date();
                             encontrado.solicitarPrestamo(me, biblioteca, fechaPrestamo);
-                            guardarArchivo(biblioteca);
+                           // guardarArchivo(biblioteca);
                         }
                         break;
 
@@ -223,9 +284,10 @@ public class Proyect_Gestion_Biblioteca {
                         if (diasRetraso > 0) {
                             prestamoDevolver.getMaterial().calcularMulta(diasRetraso);
                         }
-
+                        prestamoDevolver.getMaterial().disponibilidad = "Disponible";
                         biblioteca.devolverMaterial(prestamoDevolver);
-                        guardarArchivo(biblioteca);
+                        System.out.println("Material devuelto");
+
                         break;
 
                     case 7:
@@ -251,79 +313,5 @@ public class Proyect_Gestion_Biblioteca {
             }
 
         } while (op != 8);
-    }
-
-    public static void guardarArchivo(Biblioteca biblioteca) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("MaterialesBiblioteca.txt"));
-            bw.write("=== DISPONIBILIDAD GENERAL ===");
-            bw.newLine();
-            for (MaterialBiblioteca mat : biblioteca.getListaMateriales()) {
-                bw.write("Codigo: " + mat.getCodigo());
-                bw.write(" | Titulo: " + mat.getTitulo());
-                bw.write(" | Disponibilidad: " + mat.getDisponibilidad());
-                bw.write(" | Autor: " + mat.getAutor());
-                bw.write(" | Anio de Publicacion: " + mat.getAnioPublicacion());
-                bw.newLine();
-            }
-            bw.newLine();
-            bw.write("=== MATERIALES PRESTADOS A USUARIOS ===");
-            bw.newLine();
-            for (Prestamo p : biblioteca.getListaPrestamos()) {
-                bw.write("Usuario: " + p.getUsuario().getNombre() + " (ID: " + p.getUsuario().getId() + ")");
-                bw.write(" Material: " + p.getMaterial().getTitulo() + " (Codigo: " + p.getMaterial().getCodigo() + ")");
-                bw.write(" | Estado: " + p.getMaterial().getDisponibilidad());
-                bw.newLine();
-            }
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo");
-        }
-    }
-
-    public static void leerArchivo() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("MaterialesBiblioteca.txt"));
-            String linea;
-            System.out.println("Datos leidos desde el archivo:");
-            while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
-            }
-            br.close();
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo");
-        }
-    }
-
-    public static void guardarUsuarios(Biblioteca biblioteca) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UsuariosBiblioteca.txt"));
-            bw.write("=== USUARIOS REGISTRADOS ===");
-            bw.newLine();
-            for (Usuario u : biblioteca.getListaUsuarios()) {
-                bw.write(u.toString());
-                bw.write(" | Cedula: " + u.getCedula());
-                bw.write(" | Edad: " + u.getEdad());
-                bw.write(" | Direccion: " + u.getDireccionDomicilio());
-                bw.newLine();
-            }
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo de usuarios");
-        }
-    }
-
-    public static void leerUsuarios() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("UsuariosBiblioteca.txt"));
-            String linea;
-            System.out.println("Datos de usuarios leidos desde el archivo:");
-            while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
-            }
-            br.close();
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo de usuarios");
-        }
     }
 }

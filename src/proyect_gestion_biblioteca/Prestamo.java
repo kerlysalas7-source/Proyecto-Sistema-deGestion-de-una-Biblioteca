@@ -67,8 +67,6 @@ public class Prestamo implements IPrestamo{
         System.out.println("Usuario: " + usuario.getNombre());
         System.out.println("Material: " + material.getTitulo());
         System.out.println("Fecha del prestamo: " + fechaPrestamo);
-        System.out.println("Fecha de devolucion: " + fechaDevolucion);
-        System.out.println("Multa: $" + multa);
     }
 
     @Override

@@ -1,9 +1,11 @@
-=== DISPONIBILIDAD GENERAL ===
-Codigo: 101 | Titulo: Clean Code | Disponibilidad: Disponible | Autor: Robert C | Anio de Publicacion: 2008
-Codigo: 102 | Titulo: Estructura de Datos | Disponibilidad: Disponible | Autor: Mark Allen | Anio de Publicacion: 2013
-Codigo: 103 | Titulo: Cien anios de soledad | Disponibilidad: Disponible | Autor: Gabriel Garcia Marquez | Anio de Publicacion: 1967
-Codigo: 201 | Titulo: National Geographic | Disponibilidad: Disponible | Autor: Susan Goldberg | Anio de Publicacion: 2024
-Codigo: 202 | Titulo: IEEE Software | Disponibilidad: Disponible | Autor: Ipek Ozkaya | Anio de Publicacion: 2025
-Codigo: 301 | Titulo: Sistema de Gestion Bibliotecaria | Disponibilidad: Disponible | Autor: Jairo Masabanda | Anio de Publicacion: 2026
 
-=== MATERIALES PRESTADOS A USUARIOS ===
+Codigo: 101 | Titulo: Still | Disponibilidad: Disponible | Autor: Ariana Godoy | Anio de Publicacion: 2016
+
+Codigo: 102 | Titulo: Princpito | Disponibilidad: Disponible | Autor: Alan walker | Anio de Publicacion: 2017
+
+Codigo: 104 | Titulo:  | Autor: Alejo Barnes | Anio de Publicacion: 2013
+
+Codigo: 301 | Titulo: Poo | Autor: Pablo | Anio de Publicacion: 2012
+
+Codigo: 301 | Titulo: Poo | Autor: Pablo | Anio de Publicacion: 2012
+Codigo: 107 | Titulo: Antonio | Autor: Lusia | Anio de Publicacion: 2012

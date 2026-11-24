@@ -1,0 +1,9 @@
+ID: 201 | Nombre: Armijo | Cedula: 1754139625 | Edad: 20 | Direccion: El valle
+ID: 202 | Nombre: Vanesa | Cedula: 1759632568 | Edad: 19 | Direccion: El condado
+ID: 203 | Nombre: Jairo | Cedula: 1728080894 | Edad: 22 | Direccion: Latacunga
+ID: 206 | Nombre: Amden | Cedula: 1545369874 | Edad: 21 | Direccion: Lata
+ID: 105 | Nombre: Jaime | Cedula: 1452879631 | Edad: 45 | Direccion: Lata
+ID: 105 | Nombre: Jaime | Cedula: 1452879631 | Edad: 45 | Direccion: Lata
+ID: E101 | Nombre: Luis | Cedula: 1452369874 | Edad: -5 | Direccion: Cayambe
+ID: E102 | Nombre: Kerly | Cedula: 1754138624 | Edad: -7 | Direccion: Quito
+ID: E104 | Nombre: HITO | Cedula: 1452367896 | Edad: 11 | Direccion: Lata
